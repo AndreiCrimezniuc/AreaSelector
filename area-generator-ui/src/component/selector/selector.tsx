@@ -11,6 +11,7 @@ interface HouseNumber {
     Number: string;
 }
 
+
 const Selector = () => {
     const [streets, setStreets] = useState<Street[]>([]);
     const [houseNumbers, setHouseNumbers] = useState<HouseNumber[]>([]);
@@ -19,7 +20,7 @@ const Selector = () => {
 
     const fetchStreets = async () => {
         try {
-            const response = await axios.get<Street[]>('/streets');
+            const response = await axios.get<Street[]>('http://localhost:8080/streets');
             setStreets(response.data);
         } catch (error) {
             console.error(error);
@@ -28,7 +29,7 @@ const Selector = () => {
 
     const fetchHouseNumbers = async (street: string) => {
         try {
-            const response = await axios.get<HouseNumber[]>(`/numbers/${street}`);
+            const response = await axios.get<HouseNumber[]>(`http://localhost:8080/numbers/${street}`);
             setHouseNumbers(response.data);
         } catch (error) {
             console.error(error);
@@ -53,7 +54,7 @@ const Selector = () => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        window.open(`/area?street=${selectedStreet}&houseNumbers=${selectedHouseNumbers}`, '_blank');
+        window.open(`http://localhost:8080/area?street=${selectedStreet}&houseNumbers=${selectedHouseNumbers}`, '_blank');
     };
 
     return (

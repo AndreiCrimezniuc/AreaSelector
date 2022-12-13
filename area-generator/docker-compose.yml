@@ -1,5 +1,12 @@
 version: '3.8'
 services:
+  app:
+    build:
+      context: .
+      target: dev
+    command: air
+    ports:
+      - '8080:8080'
   postgresql_db:
     image: postgres:14.1-alpine
     restart: always
@@ -10,7 +17,8 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./postgresql:/var/lib/postgresql/data
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+#      - ./postgresql:/var/lib/postgresql/data
 volumes:
   db:
     driver: local
