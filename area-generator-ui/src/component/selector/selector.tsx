@@ -11,7 +11,7 @@ interface HouseNumber {
     Number: string;
 }
 
-
+const api_url = "http://65.109.133.226"
 const Selector = () => {
     const [streets, setStreets] = useState<Street[]>([]);
     const [houseNumbers, setHouseNumbers] = useState<HouseNumber[]>([]);
@@ -20,7 +20,7 @@ const Selector = () => {
 
     const fetchStreets = async () => {
         try {
-            const response = await axios.get<Street[]>('http://localhost:8080/streets');
+            const response = await axios.get<Street[]>(api_url +'/streets');
             setStreets(response.data);
         } catch (error) {
             console.error(error);
@@ -29,8 +29,14 @@ const Selector = () => {
 
     const fetchHouseNumbers = async (street: string) => {
         try {
-            const response = await axios.get<HouseNumber[]>(`http://localhost:8080/numbers/${street}`);
+            const response = await axios.get<HouseNumber[]>(api_url + `/numbers/${street}`);
+            const  defaultAllNumbers: HouseNumber = {
+                Number: "*"
+            }
+            response.data.push(defaultAllNumbers)
+
             setHouseNumbers(response.data);
+
         } catch (error) {
             console.error(error);
         }
@@ -54,7 +60,7 @@ const Selector = () => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        window.open(`http://localhost:8080/area?street=${selectedStreet}&houseNumbers=${selectedHouseNumbers}`, '_blank');
+        window.open(api_url + `/area?street=${selectedStreet}&houseNumbers=${selectedHouseNumbers}`, '_blank');
     };
 
     return (
