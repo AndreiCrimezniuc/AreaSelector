@@ -59,7 +59,7 @@ const Selector = () => {
     return (
         <div className='container'>
         <div className="Selector">
-            <h3>Форма поиска номера телефона и ФИО по ПОЛНОМУ адресу! <br/><span>JW.org</span></h3>
+            <h3>Форма поиска номера телефона и ФИО по ПОЛНОМУ адресу! </h3>
             <form onSubmit={handleSubmit} target="_blank">
                 <div className='_blank-form first'><label htmlFor="street-selector">Улица:</label>
                     <select id="selector-element"
