@@ -54,6 +54,9 @@ func AreaHandlerGet(g *gin.Context) {
 
 	count := 1
 
+	numbersToTable := make([]string , 0)
+
+
 	for rows.Next() {
 		var street string
 		var houseNumber string
@@ -65,6 +68,8 @@ func AreaHandlerGet(g *gin.Context) {
 			return
 		}
 
+		numbersToTable = append(numbersToTable, phoneNumber)
+
 		pdf.Cell(40, 10, strconv.Itoa(count)+")"+street)
 		pdf.Cell(40, 10, houseNumber)
 		pdf.Cell(40, 10, phoneNumber)
@@ -73,8 +78,21 @@ func AreaHandlerGet(g *gin.Context) {
 		count++
 	}
 
+	//create table
+	pdf.AddPage()
+
+	for ind ,val := range numbersToTable {
+		//pdf.Cell(40, 10, val)
+		pdf.CellFormat(40, 10, val, "1", 0, "M", false, 0, "")
+
+		if (ind+1) % 3 == 0 {
+			pdf.Ln(-1)
+		}
+	}
+
 	// Write the PDF to the response
 	g.Header("Content-Type", "application/pdf")
+	g.Header("Access-Control-Allow-Origin", "*")
 	erPdf := pdf.Output(g.Writer)
 	if erPdf != nil {
 		return
