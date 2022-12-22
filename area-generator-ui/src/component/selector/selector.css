@@ -1,13 +1,23 @@
+.container{
+    padding: 150px 0;
+    height: 100vh;
+    margin: 0 auto;
+}
+
 .Selector {
-    background-color: #49695a;
-    width: 500px;
-    height: 350px;
-    border: 3px solid #eee;
-    padding: 10px;
-    margin: 300px 200px auto;
-    /*box-sizing: border-box;*/
-    border-radius: 30px;
-    color: white;
+    background: #EEF8FF;
+    width: 90%;
+    padding-bottom:25px;
+    border-radius: 35px;
+    color: #374957;
+    margin: 0 auto;
+    /*border: 1px solid #108FF2;*/
+    max-width: 500px;
+    /*min-width: 500px;*/
+    border: 1px solid #108FF2;
+
+
+
 }
 
 .selector-element {
@@ -19,26 +29,21 @@
 
 
 .button-30 {
-    margin-top: 90px;
-    margin-left: 200px;
+    margin: 90px auto 0;
     align-items: center;
     appearance: none;
-    background-color: #FCFCFD;
+    background: #108FF2;
+    color: white;
     border-radius: 4px;
-    border-width: 0;
-    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    box-shadow: rgba(45, 35, 66, 0.3) 0 7px 3px -3px;
     box-sizing: border-box;
-    color: #36395A;
     cursor: pointer;
     display: inline-flex;
-    font-family: "JetBrains Mono", monospace;
     height: 48px;
     justify-content: center;
     line-height: 1;
     list-style: none;
     overflow: hidden;
-    padding-left: 16px;
-    padding-right: 16px;
     position: relative;
     text-align: left;
     text-decoration: none;
@@ -49,14 +54,13 @@
     white-space: nowrap;
     will-change: box-shadow, transform;
     font-size: 18px;
-}
+    width: 100%;
+    border: none;
 
-.button-30:focus {
-    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
 }
 
 .button-30:hover {
-    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    box-shadow: rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
     transform: translateY(-2px);
 }
 
@@ -72,4 +76,55 @@
 
 .button:hover{
     background-color: #e54aa4;
+}
+
+label{
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: 10px;
+
+}
+form{
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+._blank-form{
+    display: flex;
+    flex-direction: column;
+}
+.second{
+    margin-top: 20px;
+}
+select{
+    cursor: pointer;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    border: 1px solid #108FF2;
+    background: white;
+}
+
+h3{
+    text-align: center;
+    background: #108FF2;
+    color: white;
+    margin: 0;
+    padding: 25px;
+    border-radius: 30px 30px 0 0;
+    font-size: 13px;
+}
+
+@media only screen and (max-width: 560px) {
+    label{
+        font-size: 14px;
+    }
+    .button-30{
+        margin-top: 50px;
+    }
+    .container{
+        padding: 50px 0;
+    }
+
 }
