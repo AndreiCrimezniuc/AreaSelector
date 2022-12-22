@@ -57,27 +57,31 @@ const Selector = () => {
     };
 
     return (
+        <div className='container'>
         <div className="Selector">
+            <h3>Форма поиска номера телефона и ФИО по ПОЛНОМУ адресу! <br/><span>JW.org</span></h3>
             <form onSubmit={handleSubmit} target="_blank">
-                <label htmlFor="street-selector">Улица:</label>
-                <select id="selector-element"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        onChange={handleStreetChange}>
-                    {streets.map((street) => (
-                        <option key={street.Name} value={street.Name}>{street.Name}</option>
-                    ))}
-                </select>
-                <br/>
-                <label htmlFor="house-number-selector">Номера домов: (выдели несколько через CTRL)</label>
-                <select id="selector-element"
-                        className="selector-element bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        multiple onChange={handleHouseNumberChange}>
-                    {houseNumbers.map((number) => (
-                        <option key={number.Number} value={number.Number}>{number.Number}</option>
-                    ))}
-                </select>
+                <div className='_blank-form first'><label htmlFor="street-selector">Улица:</label>
+                    <select id="selector-element"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onChange={handleStreetChange}>
+                        {streets.map((street) => (
+                            <option key={street.Name} value={street.Name}>{street.Name}</option>
+                        ))}
+                    </select></div>
+
+<div className='_blank-form second'> <label htmlFor="house-number-selector">Номера домов: (выдели несколько через CTRL)</label>
+    <select id="selector-element"
+            className="selector-element bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            multiple onChange={handleHouseNumberChange}>
+        {houseNumbers.map((number) => (
+            <option key={number.Number} value={number.Number}>{number.Number}</option>
+        ))}
+    </select></div>
+
                 <button  className="button-30" type="submit">Submit</button>
             </form>
+        </div>
         </div>
     )
 }
