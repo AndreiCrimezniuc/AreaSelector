@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const SubmitButton = () => {
     const [formData, setFormData] = useState<Record<string, any>>({});
 
-    // get all forms with class "selector"
-    const forms = document.querySelectorAll<HTMLFormElement>('.selector');
+    // get all forms with class "selector-form"
+    const forms = document.querySelectorAll<HTMLFormElement>('.selector-form');
 
     useEffect(() => {
         forms.forEach((form) => {
@@ -16,22 +17,27 @@ const SubmitButton = () => {
         });
     }, []);
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        console.log(formData);
-        // send data to /area
+
+        try {
+            await axios.post('/area', formData);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
         <div>
-            {/* render forms with class "selector" */}
+            {/* render forms with class "selector-form" */}
             {Array.from(forms).map((form, index) => (
-                <form key={index} className="selector-form" onSubmit={handleSubmit}>
+                <form key={index} className="selector-form">
                     {form.innerHTML}
-                    <button type="submit">Submit</button>
                 </form>
             ))}
+            <button type="submit" onClick={handleSubmit}>Submit</button>
         </div>
     );
 };
+
 export default SubmitButton
