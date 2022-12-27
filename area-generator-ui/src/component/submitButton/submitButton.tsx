@@ -1,21 +1,37 @@
-import axios from 'axios';
-import React, {useState} from 'react';
-import Selector from "../selector/selector";
+import React, { useState, useEffect } from 'react';
 
 const SubmitButton = () => {
-    const [selectors, setSelectors] = useState<{ street: string | null, houseNumbers: string[] }[]>([]);
+    const [formData, setFormData] = useState<Record<string, any>>({});
 
-    const handleSubmit = async () => {
-        try {
-            const data = selectors.map(({street, houseNumbers}) => ({street, houseNumbers}));
-            await axios.post('http://localhost:8080/area', data);
-        } catch (error) {
-            console.error(error);
-        }
+    // get all forms with class "selector"
+    const forms = document.querySelectorAll<HTMLFormElement>('.selector');
+
+    useEffect(() => {
+        forms.forEach((form) => {
+            // get form data when it changes
+            form.addEventListener('change', (event) => {
+                const { name, value } = event.target as HTMLInputElement;
+                setFormData({ ...formData, [name]: value });
+            });
+        });
+    }, []);
+
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+        console.log(formData);
+        // send data to /area
     };
 
     return (
         <div>
+            {/* render forms with class "selector" */}
+            {Array.from(forms).map((form, index) => (
+                <form key={index} className="selector-form" onSubmit={handleSubmit}>
+                    {form.innerHTML}
+                    <button type="submit">Submit</button>
+                </form>
+            ))}
         </div>
     );
 };
+export default SubmitButton
