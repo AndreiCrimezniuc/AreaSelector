@@ -24,7 +24,7 @@ func main() {
 	router.GET("/", root)
 	router.GET("/streets", RouteHandler.StreetsHandler)
 	router.GET("/numbers/:street", RouteHandler.NumberHandler)
-	router.GET("/area", RouteHandler.AreaHandlerGet)
+	router.POST("/area", RouteHandler.AreaHandlerGet)
 
 	router.Run()
 }

@@ -7,7 +7,7 @@ import (
 )
 
 func PgConnection() *sql.DB {
-	db, err := sql.Open("postgres", "user=odmin password=odmin dbname=chisinau sslmode=disable")
+	db, err := sql.Open("postgres", "user=odmin password=odmin dbname=odmin sslmode=disable")
 	if err != nil {
 		log.Fatal(err)
 	}

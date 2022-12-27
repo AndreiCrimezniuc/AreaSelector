@@ -18,17 +18,23 @@ func AreaHandlerGet(g *gin.Context) {
 	}
 
 	houseNumberFormatted := make([]string, 0)
+	streetsFormatted := make([]string, 0)
 
 	houseNumbersRaw := strings.Split(areaNumbers.HouseNumber, ",")
+	streetsFormattedRaw := strings.Split(areaNumbers.Street, ",")
 
 	for _, val := range houseNumbersRaw {
 		houseNumberFormatted = append(houseNumberFormatted, "'"+val+"'")
 	}
 
+	for _, val := range streetsFormattedRaw {
+		streetsFormatted = append(streetsFormatted, "'"+val+"'")
+	}
+
 	db := DBService.PgConnection()
 	defer db.Close()
 
-	query := fmt.Sprintf("SELECT street,  house_number, number, names FROM address WHERE street=%s AND house_number IN (%s) ORDER by house_number", "'"+areaNumbers.Street+"'", strings.Join(houseNumberFormatted, ","))
+	query := fmt.Sprintf("SELECT street,  house_number, number, names FROM address WHERE street IN (%s) AND house_number IN (%s) ORDER by house_number", strings.Join(streetsFormatted, ","), strings.Join(houseNumberFormatted, ","))
 
 	// Query the database for the phone numbers
 	rows, err := db.Query(query)
@@ -54,8 +60,7 @@ func AreaHandlerGet(g *gin.Context) {
 
 	count := 1
 
-	numbersToTable := make([]string , 0)
-
+	numbersToTable := make([]string, 0)
 
 	for rows.Next() {
 		var street string
@@ -81,11 +86,11 @@ func AreaHandlerGet(g *gin.Context) {
 	//create table
 	pdf.AddPage()
 
-	for ind ,val := range numbersToTable {
+	for ind, val := range numbersToTable {
 		//pdf.Cell(40, 10, val)
 		pdf.CellFormat(40, 10, val, "1", 0, "M", false, 0, "")
 
-		if (ind+1) % 3 == 0 {
+		if (ind+1)%3 == 0 {
 			pdf.Ln(-1)
 		}
 	}

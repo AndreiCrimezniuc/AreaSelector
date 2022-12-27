@@ -1,5 +1,4 @@
 FROM golang:1.18-alpine as dev
-RUN go install github.com/cosmtrek/air@latest
 
 WORKDIR /app
 COPY . /app/

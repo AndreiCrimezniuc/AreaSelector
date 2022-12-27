@@ -3,7 +3,6 @@ package Structures
 type AreaNumbers struct {
 	Street      string `json:"street"`
 	HouseNumber string `json:"houseNumbers"`
-	//Number      []string
 }
 
 type Street struct {
